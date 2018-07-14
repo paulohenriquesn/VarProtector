@@ -13,7 +13,6 @@ namespace VarProtector
 
         private int Counter = 0;
         MemoryHistoryReader reader = new MemoryHistoryReader();
-        private bool pauseProtector = false;
 
         List<int> valuesProtected = new List<int>();
         List<string> HistoryMemory = new List<string>();
