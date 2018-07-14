@@ -1,6 +1,5 @@
 namespace VarProtector
 {
-
     public class MemoryHistoryReader
     {
         public int value { get; set; }
@@ -43,7 +42,7 @@ namespace VarProtector
         public void memoryProtect(int pos)
         {
             reader = memoryRead(pos);
-                if (!reader.status) { if (reader.value != valuesProtected[pos]) { Environment.Exit(0); } }          
+                if (!reader.status) { if (reader.value != valuesProtected[pos]) { Detected(); } }          
         }
 
         public void changeValue(int pos, int value)
@@ -61,10 +60,10 @@ namespace VarProtector
                     valueToken[value] = false;
                     valueToken.Remove(reader.value);
                 }
-                else { Environment.Exit(0); }
+                else { Detected(); }
 
             }
-            catch { Environment.Exit(0); }
+            catch { Detected(); }
           
            
         }
@@ -77,6 +76,14 @@ namespace VarProtector
             valueToken.Add(value, false);
             memoryWrite(Counter);
             Counter += 1;
+        }
+
+        void Detected()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Beep();
+            Console.WriteLine("[VarProtector] Value Changed With Debugger!");
+            Console.ResetColor();
         }
     }
 }
